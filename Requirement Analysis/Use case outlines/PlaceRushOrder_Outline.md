@@ -6,7 +6,7 @@
 Luồng chính của sự kiện
 |#| Tác nhân | Hành động |
 |------| ------ | ------ |
-|1| Khách hàng | Chọn phương thức giao hàng nhanh |
+|1| Khách hàng | Chọn phương thức giao hàng nhanh (Tiếp tục từ hành động thứ 5 của Use case đặt hàng)|
 |2| Hệ thống | Kiểm tra sản phẩm và địa chỉ có hỗ trợ giao hàng nhanh không |
 |3| Hệ thống | Yêu cầu khách hàng cập nhật thông tin giao hàng nhanh |
 |4| Khách hàng | Cập nhật thông tin theo yêu cầu của hệ thống | 

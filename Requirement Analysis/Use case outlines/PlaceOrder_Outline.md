@@ -10,8 +10,8 @@
 |1| Khách hàng | Xem giỏ hàng |
 |2| Khách hàng | Yêu cầu đặt hàng khi muốn mua các sản phẩm có trong giỏ hàng |
 |3| Hệ thống | Kiểm tra hàng tồn kho đủ cung cấp cho khách hàng |
-|4| Khách hàng | Nhập thông tin giao hàng, phương thức giao hàng và chỉ dẫn giao hàng (nếu cần) 
-|5| Khách hàng | Chọn phương thức giao hàng mặc định hoặc giao hàng nhanh||
+|4| Khách hàng | Nhập thông tin giao hàng và chỉ dẫn giao hàng (nếu cần) 
+|5| Khách hàng | Chọn phương thức giao hàng mặc định hoặc giao hàng nhanh|
 |6| Hệ thống | Kiểm tra tính hợp lệ của các thông tin mà khách hàng đã nhập |
 |7| Hệ thống | Kiểm tra xem khách hàng chọn phương thức giao hàng mặc định hay không |
 |8| Hệ thống | Tính tổng đơn giá của các sản phẩm và phí giao hàng, ... |
