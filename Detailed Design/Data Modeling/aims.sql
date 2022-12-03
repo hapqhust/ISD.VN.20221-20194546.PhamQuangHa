@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.4.0 on Sat Dec 3 19:26:44 2022
+-- File generated with SQLiteStudio v3.4.0 on Sat Dec 3 19:32:17 2022
 --
 -- Text encoding used: System
 --
@@ -91,7 +91,6 @@ CREATE TABLE DVD (
 CREATE TABLE Invoice (
     id          INTEGER PRIMARY KEY
                         NOT NULL,
-    subTotal    INTEGER NOT NULL,
     totalAmount INTEGER NOT NULL,
     orderId     INTEGER NOT NULL,
     CONSTRAINT fk_Invoice_Order1 FOREIGN KEY (
@@ -120,11 +119,11 @@ CREATE TABLE Media (
 
 -- Table: Order
 CREATE TABLE [Order] (
-    id             INTEGER      PRIMARY KEY
-                                NOT NULL,
-    shippingFees   VARCHAR (45),
+    id             INTEGER PRIMARY KEY
+                           NOT NULL,
+    shippingFees   INTEGER,
     subtotal       INTEGER,
-    deliveryInfoId INTEGER      NOT NULL,
+    deliveryInfoId INTEGER NOT NULL,
     CONSTRAINT fk_Order_DeliveryInfo1 FOREIGN KEY (
         deliveryInfoId
     )
