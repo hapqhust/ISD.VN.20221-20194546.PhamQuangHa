@@ -181,7 +181,8 @@ public class DVD extends Media {
                      "INNER JOIN aims.Media " +
                      "ON Media.id = DVD.id " +
                      "where Media.id = " + id + ";";
-        ResultSet res = stm.executeQuery(sql);
+                     
+        ResultSet res = super.getStatement().executeQuery(sql);
         if(res.next()) {
             
         // from media table
@@ -208,9 +209,6 @@ public class DVD extends Media {
     }
 
     
-    /** 
-     * @return List
-     */
     @Override
     public List getAllMedia() {
         return null;

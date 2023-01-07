@@ -34,16 +34,6 @@ public class Book extends Media {
         this.language = language;
         this.bookCategory = bookCategory;
     }
-
-    
-    /** 
-     * @return int
-     */
-    // getter and setter
-    public int getId() {
-        return this.id;
-    }
-
     
     /** 
      * @return String
@@ -183,8 +173,7 @@ public class Book extends Media {
                      "INNER JOIN aims.Media " +
                      "ON Media.id = Book.id " +
                      "where Media.id = " + id + ";";
-        Statement stm = AIMSDB.getConnection().createStatement();
-        ResultSet res = stm.executeQuery(sql);
+        ResultSet res = super.getStatement().executeQuery(sql);
 		if(res.next()) {
 
             // from Media table
@@ -211,7 +200,6 @@ public class Book extends Media {
 		}
     }
 
-    
     /** 
      * @return List
      */

@@ -12,7 +12,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
+// -------------Procedural Cohesion----------------
 
 /**
  * This class controls the flow of place order usecase in our AIMS project.
@@ -31,6 +33,7 @@ public class PlaceOrderController extends BaseController {
    */
   public void placeOrder() throws SQLException {
     Cart.getCart().checkAvailabilityOfProduct();
+
   }
 
   /**
@@ -67,32 +70,43 @@ public class PlaceOrderController extends BaseController {
    * @throws InterruptedException when InterruptException happen
    * @throws IOException when IOException happen
    */
-  public void processDeliveryInfo(HashMap<String, String> info)
+  public int processDeliveryInfo(HashMap<String, String> info)
       throws InterruptedException, IOException {
     LOGGER.info("Process Delivery Info");
     LOGGER.info(info.toString());
-    validateDeliveryInfo(info);
+    return validateDeliveryInfo(info);
   }
 
   /**
    * The method validates the info.
    * 
    * @param info info
+   * @return int
    * @throws InterruptedException when InterruptException happen
    * @throws IOException when IOException happen
    */
-  public void validateDeliveryInfo(HashMap<String, String> info)
+  public int validateDeliveryInfo(HashMap<String, String> info)
       throws InterruptedException, IOException {
+
     if (!validateName(info.get("name"))) {
       System.out.println("Invalid name!");
+      JOptionPane.showMessageDialog(null, "Invalid name!",
+      "Error", JOptionPane.ERROR_MESSAGE);
+      return 0;
     }
     if (!validatePhoneNumber(info.get("phone"))) {
       System.out.println("Invalid phone number!");
+      JOptionPane.showMessageDialog(null, "Invalid phone number!",
+      "Error", JOptionPane.ERROR_MESSAGE);
+      return 0;
     }
     if (!validateAddress(info.get("address"))) {
       System.out.println("Invalid address!");
+      JOptionPane.showMessageDialog(null, "Invalid address!",
+      "Error", JOptionPane.ERROR_MESSAGE);
+      return 0;
     }
-    return;
+    return 1;
   }
 
 

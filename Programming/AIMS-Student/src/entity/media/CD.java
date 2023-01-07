@@ -121,7 +121,7 @@ public class CD extends Media {
                      "INNER JOIN aims.Media " +
                      "ON Media.id = CD.id " +
                      "where Media.id = " + id + ";";
-        ResultSet res = stm.executeQuery(sql);
+        ResultSet res = super.getStatement().executeQuery(sql);
 		if(res.next()) {
             
             // from media table

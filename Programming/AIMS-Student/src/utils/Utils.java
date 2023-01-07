@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+// -----------------Coincidental Cohesion--------------
+
 /**
  * @author nguyenlm Contains helper functions
  */

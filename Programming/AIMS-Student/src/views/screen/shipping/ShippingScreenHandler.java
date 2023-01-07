@@ -87,7 +87,8 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 		messages.put("province", province.getValue());
 		try {
 			// process and validate delivery info
-			getBController().processDeliveryInfo(messages);
+			int valid = getBController().processDeliveryInfo(messages);
+			if (valid == 0) return;
 		} catch (InvalidDeliveryInfoException e) {
 			throw new InvalidDeliveryInfoException(e.getMessage());
 		}

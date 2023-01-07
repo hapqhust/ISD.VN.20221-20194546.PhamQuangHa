@@ -10,27 +10,41 @@ import java.util.logging.Logger;
 import entity.db.AIMSDB;
 import utils.Utils;
 
+
 /**
  * The general media class, for another media it can be done by inheriting this class
  * @author nguyenlm
  */
+
 public class Media {
-
+    
     private static Logger LOGGER = Utils.getLogger(Media.class.getName());
+    
+    // -------- CONTENT COUPLING -------------------
+    // protected Statement stm;
+    // protected int id;
+    // protected String title;
+    // protected String category;
+    // protected int value; // the real price of product (eg: 450)
+    // protected int price; // the price which will be displayed on browser (eg: 500)
+    // protected int quantity;
+    // protected boolean support;
+    // protected String type;
+    // protected String imageURL;
 
-    protected Statement stm;
-    protected int id;
-    protected String title;
-    protected String category;
-    protected int value; // the real price of product (eg: 450)
-    protected int price; // the price which will be displayed on browser (eg: 500)
-    protected int quantity;
-    protected boolean support;
-    protected String type;
-    protected String imageURL;
+    private Statement stm;
+    private int id;
+    private String title;
+    private String category;
+    private int value; // the real price of product (eg: 450)
+    private int price; // the price which will be displayed on browser (eg: 500)
+    private int quantity;
+    private boolean support;
+    private String type;
+    private String imageURL;
 
     public Media() throws SQLException{
-        stm = AIMSDB.getConnection().createStatement();
+        // stm = AIMSDB.getConnection().createStatement();
     }
 
     public Media (int id, String title, String category, int price, int quantity, String type) throws SQLException{
@@ -152,6 +166,10 @@ public class Media {
      * @return int
      */
     // getter and setter 
+    public Statement getStatement() {
+        return this.stm;
+    }
+
     public int getId() {
         return this.id;
     }

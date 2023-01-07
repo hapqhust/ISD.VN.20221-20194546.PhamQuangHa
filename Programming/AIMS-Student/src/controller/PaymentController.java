@@ -13,6 +13,7 @@ import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
 
+// ---------------- Procedural  cohesion ---------------
 
 /**
  * This {@code PaymentController} class control the flow of the payment process
@@ -94,6 +95,7 @@ public class PaymentController extends BaseController {
 
 			result.put("RESULT", "PAYMENT SUCCESSFUL!");
 			result.put("MESSAGE", "You have succesffully paid the order!");
+			emptyCart();
 		} catch (PaymentException | UnrecognizedException ex) {
 			result.put("MESSAGE", ex.getMessage());
 		}

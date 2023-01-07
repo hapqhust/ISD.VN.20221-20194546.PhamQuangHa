@@ -16,6 +16,8 @@ import utils.Configs;
 import utils.MyMap;
 import utils.Utils;
 
+// ---------------Communicational Cohesion-----------------
+
 public class InterbankSubsystemController {
 
 	private static final String PUBLIC_KEY = "AQzdE8O/fR8=";
@@ -25,19 +27,19 @@ public class InterbankSubsystemController {
 
 	private static InterbankBoundary interbankBoundary = new InterbankBoundary();
 
-	
-	/** 
+
+	/**
 	 * @param card
 	 * @param amount
 	 * @param contents
 	 * @return PaymentTransaction
 	 */
-	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
+	private PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		return null;
 	}
-	
-	
-	/** 
+
+
+	/**
 	 * @param data
 	 * @return String
 	 */
@@ -45,14 +47,14 @@ public class InterbankSubsystemController {
 		return ((MyMap) data).toJSON();
 	}
 
-	
-	/** 
+
+	/**
 	 * @param card
 	 * @param amount
 	 * @param contents
 	 * @return PaymentTransaction
 	 */
-	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
+	private PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
 		Map<String, Object> transaction = new MyMap();
 
 		try {
@@ -70,7 +72,8 @@ public class InterbankSubsystemController {
 		requestMap.put("version", VERSION);
 		requestMap.put("transaction", transaction);
 
-		String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, generateData(requestMap));
+		String responseText =
+				interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, generateData(requestMap));
 		MyMap response = null;
 		try {
 			response = MyMap.toMyMap(responseText, 0);
@@ -82,8 +85,19 @@ public class InterbankSubsystemController {
 		return makePaymentTransaction(response);
 	}
 
-	
-	/** 
+
+	public PaymentTransaction doTransaction(CreditCard card, int amount, String contents, String type) {
+		if (type == "pay") {
+			return payOrder(card, amount, contents);
+		} else {
+			if (type == "refund") {
+				return refund(card, amount, contents);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * @param response
 	 * @return PaymentTransaction
 	 */
@@ -91,31 +105,33 @@ public class InterbankSubsystemController {
 		if (response == null)
 			return null;
 		MyMap transcation = (MyMap) response.get("transaction");
-		CreditCard card = new CreditCard((String) transcation.get("cardCode"), (String) transcation.get("owner"),
-				Integer.parseInt((String) transcation.get("cvvCode")), (String) transcation.get("dateExpired"));
+		CreditCard card = new CreditCard((String) transcation.get("cardCode"),
+				(String) transcation.get("owner"), Integer.parseInt((String) transcation.get("cvvCode")),
+				(String) transcation.get("dateExpired"));
 		PaymentTransaction trans = new PaymentTransaction((String) response.get("errorCode"), card,
 				(String) transcation.get("transactionId"), (String) transcation.get("transactionContent"),
-				Integer.parseInt((String) transcation.get("amount")), (String) transcation.get("createdAt"));
+				Integer.parseInt((String) transcation.get("amount")),
+				(String) transcation.get("createdAt"));
 
 		switch (trans.getErrorCode()) {
-		case "00":
-			break;
-		case "01":
-			throw new InvalidCardException();
-		case "02":
-			throw new NotEnoughBalanceException();
-		case "03":
-			throw new InternalServerErrorException();
-		case "04":
-			throw new SuspiciousTransactionException();
-		case "05":
-			throw new NotEnoughTransactionInfoException();
-		case "06":
-			throw new InvalidVersionException();
-		case "07":
-			throw new InvalidTransactionAmountException();
-		default:
-			throw new UnrecognizedException();
+			case "00":
+				break;
+			case "01":
+				throw new InvalidCardException();
+			case "02":
+				throw new NotEnoughBalanceException();
+			case "03":
+				throw new InternalServerErrorException();
+			case "04":
+				throw new SuspiciousTransactionException();
+			case "05":
+				throw new NotEnoughTransactionInfoException();
+			case "06":
+				throw new InvalidVersionException();
+			case "07":
+				throw new InvalidTransactionAmountException();
+			default:
+				throw new UnrecognizedException();
 		}
 
 		return trans;

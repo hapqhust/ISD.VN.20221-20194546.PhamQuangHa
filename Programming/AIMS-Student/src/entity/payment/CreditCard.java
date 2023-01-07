@@ -9,7 +9,6 @@ public class CreditCard {
 	private String dateExpired;
 
 	public CreditCard(String cardCode, String owner, int cvvCode, String dateExpired) {
-		super();
 		this.cardCode = cardCode;
 		this.owner = owner;
 		this.cvvCode = cvvCode;

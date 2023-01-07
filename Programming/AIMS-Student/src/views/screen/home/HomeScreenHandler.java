@@ -192,6 +192,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
             // filter only media with the choosen category
             List filteredItems = new ArrayList<>();
+            
             homeItems.forEach(me -> {
                 MediaHandler media = (MediaHandler) me;
                 if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())){

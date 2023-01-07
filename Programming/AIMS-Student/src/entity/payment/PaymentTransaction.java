@@ -10,7 +10,6 @@ public class PaymentTransaction {
 	
 	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
 			int amount, String createdAt) {
-		super();
 		this.errorCode = errorCode;
 		this.card = card;
 		this.transactionId = transactionId;

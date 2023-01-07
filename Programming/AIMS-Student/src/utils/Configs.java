@@ -3,6 +3,9 @@ package utils;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+
+//-------------------	Coincidental Cohesion ------------------
+
 /**
  * @author nguyenlm Contains the configs for AIMS Project
  */
