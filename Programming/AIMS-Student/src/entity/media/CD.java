@@ -146,12 +146,12 @@ public class CD extends Media {
     }
 
     
-    /** 
-     * @return List
-     */
-    @Override
-    public List getAllMedia() {
-        return null;
-    }
+    // /** 
+    //  * @return List
+    //  */
+    // @Override
+    // public List getAllMedia() {
+    //     return null;
+    // }
 
 }

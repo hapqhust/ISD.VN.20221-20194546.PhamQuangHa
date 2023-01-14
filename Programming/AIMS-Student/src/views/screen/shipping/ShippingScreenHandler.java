@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import controller.PlaceOrderController;
+import controller.calculate.CalculateController;
 import common.exception.InvalidDeliveryInfoException;
 import entity.invoice.Invoice;
 import entity.order.Order;
@@ -94,7 +95,8 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 		}
 	
 		// calculate shipping fees
-		int shippingFees = getBController().calculateShippingFee(order);
+		CalculateController calController = new CalculateController();
+		int shippingFees = calController.calculateShippingFee(order);
 		order.setShippingFees(shippingFees);
 		order.setDeliveryInfo(messages);
 		

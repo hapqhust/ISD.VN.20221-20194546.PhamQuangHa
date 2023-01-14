@@ -10,7 +10,7 @@ import common.exception.NotEnoughBalanceException;
 import common.exception.NotEnoughTransactionInfoException;
 import common.exception.SuspiciousTransactionException;
 import common.exception.UnrecognizedException;
-import entity.payment.CreditCard;
+import entity.payment.PaymentCard;
 import entity.payment.PaymentTransaction;
 import utils.Configs;
 import utils.MyMap;
@@ -34,7 +34,7 @@ public class InterbankSubsystemController {
 	 * @param contents
 	 * @return PaymentTransaction
 	 */
-	private PaymentTransaction refund(CreditCard card, int amount, String contents) {
+	private PaymentTransaction refund(PaymentCard card, int amount, String contents) {
 		return null;
 	}
 
@@ -54,7 +54,7 @@ public class InterbankSubsystemController {
 	 * @param contents
 	 * @return PaymentTransaction
 	 */
-	private PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
+	private PaymentTransaction payOrder(PaymentCard card, int amount, String contents) {
 		Map<String, Object> transaction = new MyMap();
 
 		try {
@@ -86,7 +86,7 @@ public class InterbankSubsystemController {
 	}
 
 
-	public PaymentTransaction doTransaction(CreditCard card, int amount, String contents, String type) {
+	public PaymentTransaction doTransaction(PaymentCard card, int amount, String contents, String type) {
 		if (type == "pay") {
 			return payOrder(card, amount, contents);
 		} else {
@@ -105,7 +105,7 @@ public class InterbankSubsystemController {
 		if (response == null)
 			return null;
 		MyMap transcation = (MyMap) response.get("transaction");
-		CreditCard card = new CreditCard((String) transcation.get("cardCode"),
+		PaymentCard card = new CreditCard((String) transcation.get("cardCode"),
 				(String) transcation.get("owner"), Integer.parseInt((String) transcation.get("cvvCode")),
 				(String) transcation.get("dateExpired"));
 		PaymentTransaction trans = new PaymentTransaction((String) response.get("errorCode"), card,

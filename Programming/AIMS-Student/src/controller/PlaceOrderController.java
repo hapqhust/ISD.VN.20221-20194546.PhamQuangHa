@@ -10,9 +10,9 @@ import entity.order.OrderMedia;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import controller.validate.ValidateController;
 
 // -------------Procedural Cohesion----------------
 
@@ -87,20 +87,21 @@ public class PlaceOrderController extends BaseController {
    */
   public int validateDeliveryInfo(HashMap<String, String> info)
       throws InterruptedException, IOException {
+      ValidateController valController = new ValidateController();
 
-    if (!validateName(info.get("name"))) {
+    if (!valController.validateName(info.get("name"))) {
       System.out.println("Invalid name!");
       JOptionPane.showMessageDialog(null, "Invalid name!",
       "Error", JOptionPane.ERROR_MESSAGE);
       return 0;
     }
-    if (!validatePhoneNumber(info.get("phone"))) {
+    if (!valController.validatePhoneNumber(info.get("phone"))) {
       System.out.println("Invalid phone number!");
       JOptionPane.showMessageDialog(null, "Invalid phone number!",
       "Error", JOptionPane.ERROR_MESSAGE);
       return 0;
     }
-    if (!validateAddress(info.get("address"))) {
+    if (!valController.validateAddress(info.get("address"))) {
       System.out.println("Invalid address!");
       JOptionPane.showMessageDialog(null, "Invalid address!",
       "Error", JOptionPane.ERROR_MESSAGE);
@@ -110,64 +111,4 @@ public class PlaceOrderController extends BaseController {
   }
 
 
-  /**
-   * This method validate customer's phone number.
-   * 
-   * @param phoneNumber phone number
-   * @return boolean
-   */
-  public boolean validatePhoneNumber(String phoneNumber) {
-    // verify if phone has 10 digits and start with 0
-    if (phoneNumber.length() != 10 || phoneNumber.charAt(0) != '0') {
-      return false;
-    }
-    // verify if phone contains only number
-    try {
-      Integer.parseInt(phoneNumber);
-    } catch (NumberFormatException e) {
-      return false;
-    }
-    return true;
-  }
-
-
-  /**
-   * This medthod validate customer's name.
-   * 
-   * @param name name
-   * @return boolean
-   */
-  public boolean validateName(String name) {
-    if (name == null || name.trim().length() == 0 || name.equals("null")) {
-      return false;
-    }
-    return name.matches("^[a-zA-Z]+[\\-'\\s]?[a-zA-Z ]+$");
-  }
-
-
-  /**
-   * This method validate customer's address.
-   * 
-   * @param address address
-   * @return boolean
-   */
-  public boolean validateAddress(String address) {
-    if (address == null || address.trim().length() == 0 || address.equals("null")) {
-      return false;
-    }
-    return address.matches("^[.0-9a-zA-Z\\s,-]+$");
-  }
-
-  /**
-   * This method calculates the shipping fees of order.
-   * 
-   * @param order order
-   * @return shippingFee
-   */
-  public int calculateShippingFee(Order order) {
-    Random rand = new Random();
-    int fees = (int) (((rand.nextFloat() * 10) / 100) * order.getAmount());
-    LOGGER.info("Order Amount: " + order.getAmount() + " -- Shipping Fees: " + fees);
-    return fees;
-  }
 }

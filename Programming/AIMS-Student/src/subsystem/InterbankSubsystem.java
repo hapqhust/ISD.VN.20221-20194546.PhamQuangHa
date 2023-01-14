@@ -4,6 +4,7 @@ import common.exception.InternalServerErrorException;
 import common.exception.InvalidCardException;
 import common.exception.NotEnoughBalanceException;
 import entity.payment.CreditCard;
+import entity.payment.PaymentCard;
 import entity.payment.PaymentTransaction;
 import subsystem.interbank.InterbankSubsystemController;
 
@@ -31,19 +32,19 @@ public class InterbankSubsystem implements InterbankInterface {
 	}
 
 	/**
-	 * @see InterbankInterface#payOrder(entity.payment.CreditCard, int,
+	 * @see InterbankInterface#payOrder(entity.payment.PaymentCard, int,
 	 *      java.lang.String)
 	 */
-	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
+	public PaymentTransaction payOrder(PaymentCard card, int amount, String contents) {
 		PaymentTransaction transaction = ctrl.doTransaction(card, amount, contents, "pay");
 		return transaction;
 	}
 
 	/**
-	 * @see InterbankInterface#refund(entity.payment.CreditCard, int,
+	 * @see InterbankInterface#refund(entity.payment.PaymentCard, int,
 	 *      java.lang.String)
 	 */
-	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
+	public PaymentTransaction refund(PaymentCard card, int amount, String contents) {
 		PaymentTransaction transaction = ctrl.doTransaction(card, amount, contents, "refund");
 		return transaction;
 	}
